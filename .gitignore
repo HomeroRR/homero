@@ -1,0 +1,14 @@
+tmp
+
+# From Jekyll
+_posts
+about.markdown
+Gemfile
+Gemfile.lock
+index.markdown
+
+_site
+.sass-cache
+.jekyll-cache
+.jekyll-metadata
+vendor
