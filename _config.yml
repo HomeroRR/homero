@@ -1,4 +1,10 @@
 theme: jekyll-theme-cayman
 
 title: Homero Roman Roman
-description: Personal Webpage and Blog
+description_a: Microsoft Software Engineer
+description_b: Masters in Computer Science
+
+collections:
+    experience:
+    projects:
+    publications:

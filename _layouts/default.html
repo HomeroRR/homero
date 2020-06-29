@@ -18,31 +18,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?' | append: site.github.build_revision | relative_url }}">
   </head>
-  <body>
-    <!-- <a id="skip-to-content" href="#content">Skip to the content.</a> -->
 
-    <header class="page-header" role="banner">
-      <h1 class="project-name">{{ site.title | default:page.title  }}</h1>
-      <h2 class="project-tagline">{{ site.description | default:page.description  }}</h2>
-      <!-- {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-      {% endif %}
-      {% if site.show_downloads %}
-        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
-        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
-      {% endif %} -->
+  <body id="home">
+
+    <!-- Responsive Navbar -->
+    <div class="navbar" id="navbar">
+      <a class="active" href="#home">HR</a>
+      <a href='#experience'>Experience</a>
+      <a href='#education'>Education</a>
+      <a href='#projects'>Projects</a>
+      <a href='#publications'>Publications</a>
+      <a class="float-right emphasize" id="contact_btn" href="#contact">Contact</a>
+      <a href="javascript:void(0);" class="icon" onclick="responsiveNavbar()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div> 
+
+    <!-- Banner header  -->
+    <header class="page-header"  role="banner">
+        <img src="{{ '/assets/images/homero.jpg' }}" class="round" alt="Homero's Profile Picture"/>  
+            <h1 class="project-name">{{ site.title | default:page.title  }}</h1>
+            <img src="{{ '/assets/images/microsoft_logo.png' }}" alt="Microsoft logo"/>  
+            <div class="inline-block">
+              <img src="{{ '/assets/images/stanford_logo_part2.png' }}" alt="Stanford logo"/>
+            </div>
     </header>
 
-    <main id="content" class="main-content" role="main">
-      {{ content }}
+    <main id="content" class="main-content " role="main">
+
+      <!-- Experience section -->
+      <div class="section" id="experience">
+        <section id=timeline>
+          <h1>Experience</h1>
+          <div class="demo-card-wrapper">
+            {% for publication in site["experience"] %}
+            <div class="demo-card demo-card--step1">
+              <div class="head">
+                {% if publication.year %}
+                <div class="number-box">
+                  <img class="tiny-square" src={{ publication.picture }} alt="Graphic"/>
+                </div>
+                {% endif %}
+                <h2>{% if publication.subtitle %}<span>{{ publication.subtitle }}</span>{% endif%} {{ publication.title }}</h2>
+              </div>
+              <div class="body">
+                <p>{{ publication.content }}</p>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+      </div>
+
+      <!-- Skills Section -->
+      <div class="section simple-border padding-bottom" id="skills"> 
+        {% assign skills_sets = "python,pytorch,ts,react,docker"
+        | append: ":cpp,tf,js,angular,azure"
+        | append: ":r,keras,sass,django,aws"
+        | append: ":java,scikit,css,flask,mongodb"
+        | append: ":swift,spark,html,bootstrap,mysql"| split: ":" %}
+        <h1 class="centered tab_section">Skills</h1>
+        {% for skills_set in skills_sets %}
+          {% assign skills = skills_set | split: "," %}
+          <div class="symbols">
+            {% for skill in skills %}
+              <img src={{ '/assets/images/skills/' }}{{ skill | append: '.png'}} class="tiny-square"/>
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Education Section -->
+      <div class="centered section border-top" id="education">
+        <h1 class="tab_section">Education</h1>
+        <img src={{ '/assets/images/stanford_logo_part1.png' }} />
+        <h1>Stanford University Master in Computer Science</h1>
+      </div>
+
+      <!-- Projects and publications sections -->
+      {% assign content_types = "projects, publications" | split: ", " %}
+      {% for content_type in content_types %}
+      <div class="section border-top" id={{ content_type }}>
+        <div class="simple-border">  
+            <h1 class="centered tab_section"> {{content_type | capitalize }} </h1>
+            {% for publication in site[content_type] %}
+            <div class="card"> 
+              <img src={{ publication.picture }} class="square"/>
+              <div class="desc">
+                <h2>{{ publication.title }}</h2>  
+                <p>
+                  {{ publication.content }}
+                </p> 
+              </div>
+            </div>
+            {% endfor %}
+        </div> 
+      </div> 
+      {% endfor %}
+
+      <!-- Contact section -->
+      <div class="section border-top" id="contact">
+        <h1 class="centered tab_section">Contact</h1>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScjC-sfHIadgQQkv3JSbL9_VE5MRRK_Toxs_mN7LJnOTrneoQ/viewform?embedded=true" 
+        width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…
+        </iframe>
+      </div>
+
+      <!-- Main content footer -->
       <footer class="site-footer">
-        {% if site.github.is_project_page %}
-          <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">This website</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
-        {% endif %}
-        <!-- <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span> -->
-      </footer>
+          {% if site.github.is_project_page %}
+            <span class="site-footer-owner centered"><a href="{{ site.github.repository_url }}">This website</a> was designed, coded, and is currently maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
+          {% endif %}
+      </footer>    
+
     </main>
+    
+    <script src="{{ '/js/default.js' }}"></script>
   </body>
 </html>

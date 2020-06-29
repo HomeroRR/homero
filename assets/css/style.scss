@@ -1,9 +1,879 @@
 ---
 ---
 
-@import "{{ site.theme }}";
-// .main-content {
-//   h1 {
-//    color: #ff0000;
-//  }
+//-------Variables------------------
+$primary-color-dark:   #303F9F;
+$primary-color:        #3F51B5;
+$primary-color-light:  #C5CAE9;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FF5722;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+// Breakpoints
+$large-breakpoint: 64em !default;
+$medium-breakpoint: 42em !default;
+
+// Headers
+$header-heading-color: $primary-color-text !default; //#0c124e
+$header-bg-color: $primary-color !default; //#0893c3
+$header-bg-color-secondary:$primary-color !default; //#009aad
+
+// Text
+$section-headings-color: $primary-text-color !default;
+$body-text-color: $secondary-text-color !default;
+$body-link-color: $primary-color !default;
+$blockquote-text-color:$divider-color !default;
+
+// Code
+$code-bg-color: $divider-color !default;
+$code-text-color: $secondary-text-color !default;
+
+// Borders
+$border-color: $divider-color !default;
+$table-border-color: $divider-color !default;
+$hr-border-color: $divider-color !default;
+//-------------------------
+
+
+@mixin large {
+  @media screen and (min-width: #{$large-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin medium {
+  @media screen and (min-width: #{$medium-breakpoint}) and (max-width: #{$large-breakpoint}) {
+    @content;
+  }
+}
+
+@mixin small {
+  @media screen and (max-width: #{$medium-breakpoint}) {
+    @content;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: $body-text-color;
+}
+
+#skip-to-content {
+  height: 1px;
+  width: 1px;
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+
+  &:focus {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    height: auto;
+    width: auto;
+    background: invert($body-link-color);
+    outline: thick solid invert($body-link-color);
+  }
+}
+
+a {
+  color: $body-link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  background-color: $primary-color-dark;//rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  + .btn {
+    margin-left: 1rem;
+  }
+
+  @include large {
+    padding: 0.75rem 1rem;
+  }
+
+  @include medium {
+    padding: 0.6rem 0.9rem;
+    font-size: 0.9rem;
+  }
+
+  @include small {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+
+    + .btn {
+      margin-top: 1rem;
+      margin-left: 0;
+    }
+  }
+}
+
+.page-header {
+  color: $header-heading-color;
+  text-align: center;
+  background-color: $header-bg-color;
+  // background: linear-gradient(to bottom, $header-bg-color-secondary 25%, white 50%);
+
+
+  @include large {
+    padding: 3rem 6rem; //5 6
+  }
+
+  @include medium {
+    padding: 3rem 4rem; //3 4
+  }
+
+  @include small {
+    padding: 2rem 1rem; //2 1
+  }
+}
+
+.project-name {
+  margin-top: 0;
+  margin-bottom: 0.1rem;
+
+  @include large {
+    font-size: 3.25rem;
+  }
+
+  @include medium {
+    font-size: 2.25rem;
+  }
+
+  @include small {
+    font-size: 1.75rem;
+  }
+}
+
+.project-tagline {
+  margin-bottom: 2rem;
+  font-weight: normal;
+  opacity: 0.9;
+
+  @include large {
+    font-size: 1.25rem;
+  }
+
+  @include medium {
+    font-size: 1.15rem;
+  }
+
+  @include small {
+    font-size: 1rem;
+  }
+}
+
+.main-content {
+  word-wrap: break-word;
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  @include large {
+    max-width: 100rem; //64
+    padding: 2rem 6rem;
+    margin: 0 auto;
+    font-size: 1.1rem;
+  }
+
+  @include medium {
+    padding: 2rem 4rem;
+    font-size: 1.1rem;
+  }
+
+  @include small {
+    padding: 2rem 1rem;
+    font-size: 1rem;
+  }
+  
+  kbd {
+    background-color: #fafbfc;
+    border: 1px solid #c6cbd1;
+    border-bottom-color: #959da5;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #959da5;
+    color: #444d56;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 10px;
+    padding: 3px 5px;
+    vertical-align: middle;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    color: $section-headings-color;
+  }
+
+  p {
+    margin-bottom: 1em;
+  }
+
+  code {
+    padding: 2px 4px;
+    font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 0.9rem;
+    color: $code-text-color;
+    background-color: $code-bg-color;
+    border-radius: 0.3rem;
+  }
+
+  pre {
+    padding: 0.8rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    color: $code-text-color;
+    word-wrap: normal;
+    background-color: $code-bg-color;
+    border: solid 1px $border-color;
+    border-radius: 0.3rem;
+
+    > code {
+      padding: 0;
+      margin: 0;
+      font-size: 0.9rem;
+      color: $code-text-color;
+      word-break: normal;
+      white-space: pre;
+      background: transparent;
+      border: 0;
+    }
+  }
+
+  .highlight {
+    margin-bottom: 1rem;
+
+    pre {
+      margin-bottom: 0;
+      word-break: normal;
+    }
+  }
+
+  .highlight pre,
+  pre {
+    padding: 0.8rem;
+    overflow: auto;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    border-radius: 0.3rem;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre code,
+  pre tt {
+    display: inline;
+    max-width: initial;
+    padding: 0;
+    margin: 0;
+    overflow: initial;
+    line-height: inherit;
+    word-wrap: normal;
+    background-color: transparent;
+    border: 0;
+
+    &:before,
+    &:after {
+      content: normal;
+    }
+  }
+
+  ul,
+  ol {
+    margin-top: 0;
+  }
+
+  blockquote {
+    padding: 0 1rem;
+    margin-left: 0;
+    color: $blockquote-text-color;
+    border-left: 0.3rem solid $border-color;
+
+    > :first-child {
+      margin-top: 0;
+    }
+
+    > :last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    overflow: auto;
+    word-break: normal;
+    word-break: keep-all; // For Firefox to horizontally scroll wider tables.
+    -webkit-overflow-scrolling: touch;
+
+    th {
+      font-weight: bold;
+    }
+
+    th,
+    td {
+      padding: 0.5rem 1rem;
+      border: 1px solid $table-border-color;
+    }
+  }
+
+  dl {
+    padding: 0;
+
+    dt {
+      padding: 0;
+      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    dd {
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  hr {
+    height: 2px;
+    padding: 0;
+    margin: 1rem 0;
+    background-color: $hr-border-color;
+    border: 0;
+  }
+}
+
+.site-footer {
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: solid 1px $hr-border-color;
+
+  @include large {
+    font-size: 1rem;
+  }
+
+  @include medium {
+    font-size: 1rem;
+  }
+
+  @include small {
+    font-size: 0.9rem;
+  }
+}
+
+.site-footer-owner {
+  display: block;
+  font-weight: bold;
+}
+
+.site-footer-credits {
+  color: $blockquote-text-color;
+}
+
+/* ----------------------------------- START CUSTOM STYLES -------------------------------- */
+
+.nav-element{color:$primary-color-text!important;background-color:$primary-color-dark!important}
+.nav-element-emphasize{color:$primary-color-text!important;background-color:$accent-color !important}
+
+.dark-mode{
+  background-color: $header-bg-color;
+}
+.border { box-shadow: 2px 2px 4px $primary-color-dark; border-width: 2px; border-color: $divider-color; border-style: solid; margin-bottom: 5px;}
+.simple-border{ margin-bottom: 5px;}
+.round { border-radius: 25px; }
+
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  @include small() {
+    justify-content: center;
+  }
+  padding-bottom: 30px;
+}
+.card .desc {
+  padding-left: 30px;
+  @include large {
+    flex: 1;
+  }
+  @include medium {
+    flex: 1;
+  }
+}
+
+.desc >h2{
+  text-align: left;
+}
+
+.icon-text{
+  display: inline-flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.right-text{
+  padding-left: 4px;
+  @include large {
+    font-size: 2rem;
+  }
+
+  @include medium {
+    font-size: 2rem;
+  }
+
+  @include small {
+    font-size: 1.25rem;
+  }
+}
+.centered{
+  text-align: center;
+}
+.bar{
+  display:inline-block;
+  width:auto;
+}
+.tab_section{
+  font-size: 3rem;
+  font-weight: 200;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: $primary-color-dark;
+  z-index:3;
+  position: sticky !important;
+  top: 0;
+}
+
+.navbar a {
+  float: left;
+  display: block;
+  color: $primary-color-text;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.navbar a.active {
+  background-color: $primary-color;
+  color: $primary-color-text;
+}
+
+.navbar .icon {
+  display: none;
+}
+
+@include small{
+  .navbar a:not(:first-child) {display: none;}
+  .navbar a.icon {
+    float: right;
+    display: block;
+  }
+  #contact_btn {display: block;}
+  .navbar.responsive {position: relative;}
+  .navbar.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .navbar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+
+.emphasize{
+  background-color: $accent-color;
+  font-weight: bold !important;
+  color: $primary-text-color !important;
+}
+
+.float-right{
+  float:right !important;
+  text-align: right !important;
+  @include small {
+    float:left !important;
+  }
+}
+
+.mobile-no-show{
+  @include small {
+    display:none !important;
+  }
+  @include medium {
+    display:block;
+  }
+  @include large {
+    display:block;
+  }
+}
+
+.square{
+  width: 280px;
+  height: 280px;
+
+}
+.tiny-square{
+  width: 50px;
+  height: 50px;
+
+}
+
+.inline-block{
+  display: inline-block;
+  justify-items: center;
+  align-items: center;
+}
+
+.light-background{
+  background: $primary-color-light;
+}
+
+.white-background{
+  background: $primary-color-text;
+}
+
+.symbols{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.section{
+  padding-top: 3rem;
+  
+}
+
+.border-top{
+  border-top: solid 1px $hr-border-color;
+}
+
+.padding-bottom{
+  padding-bottom: 3rem;
+}
+/* ----------------------------------- END CUSTOM STYLES -------------------------------- */
+
+/* ----------------------------------- START TIMELINE STYLES -------------------------------- */
+
+
+
+/* Media Queries */
+
+@mixin mq-xs {
+  @media (min-width: 320px) {
+    @content;
+  }
+}
+
+@mixin mq-sm {
+  @media (min-width: 480px) {
+    @content;
+  }
+}
+
+@mixin mq-md {
+  @media (min-width: 720px) {
+    @content;
+  }
+}
+
+@mixin mq-lg {
+  @media (min-width: 1000px) {
+    @content;
+  }
+}
+
+$background: #f7f7f7;
+$box-shadow: 0px 1px 22px 4px rgba(0, 0, 0, 0.07);
+$border: 1px solid rgba(191, 191, 191, 0.4);
+$items: 5;
+$rows: ceil($items/2);
+
+/* Card sizing */
+
+$card-height: 300px; //400
+$card-width: 500px; //450
+$inner-margin: 15px;
+$number-size: 35px;
+$stagger: 100px;//180px;
+$outer-margin: 30px;//90px
+$marker-size: 9px;//9px
+
+/* Colors */
+
+$steps: #46b8e9;
+$colors: #46b8e9,
+#3ee9d1,
+#ce43eb,
+#4d92eb;
+$timeline: #bdbdbd;
+
+/* Calculations */
+
+$container-height: $rows * ($card-height + $outer-margin) + $stagger - 100px;
+$container-width: $card-width*2 + $outer-margin*3;
+$head-height: $number-size + 50;
+$body-height: $card-height - $head-height;
+$marker-dist: $card-width + $outer-margin/2 - $marker-size/2;
+
+/* Placeholders */
+
+@include mq-lg {
+  %arrow {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+  }
+  %marker {
+    position: absolute;
+    content: "";
+    width: $marker-size;
+    height: $marker-size;
+    background-color: $timeline;
+    border-radius: $marker-size;
+    box-shadow: 0px 0px 2px 8px $background;
+  }
+}
+
+
+/* Some Cool Stuff */
+
+$counter: $items - $rows + 2;
+@for $i from 1 through $rows {
+  .demo-card:nth-child(#{$i*2-1})   { order: $i }
+  .demo-card:nth-child(#{$i*2})     { order: $counter }
+  $counter: $counter + 1;
+}
+
+/* Border Box */
+
+// * {
+//   box-sizing: border-box;
 // }
+
+/* Fonts */
+
+// body {
+//   font-family: Roboto;
+// }
+
+#timeline {
+  padding: 25px 0;
+  background: $background;
+  border-top: $border;
+  border-bottom: $border;
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+  p.leader {
+    text-align: center;
+    max-width: 90%;
+    margin: auto;
+    margin-bottom: 45px;
+  }
+  .demo-card-wrapper {
+    position: relative;
+    margin: auto;
+    @include mq-lg {
+      display: flex;
+      flex-flow: column wrap;
+      width: $container-width;
+      height: $container-height;
+      margin: 0 auto;
+    }
+    &::after {
+      z-index: 1;
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      border-left: $border;
+      @include mq-lg {
+        border-left: 1px solid $timeline;
+      }
+    }
+  }
+  .demo-card {
+    position: relative;
+    display: block;
+    margin: 10px auto 80px;
+    max-width: 94%;
+    z-index: 2;
+    @include mq-sm {
+      max-width: 60%;
+      box-shadow: $box-shadow;
+    }
+    @include mq-md {
+      max-width: 40%;
+    }
+    @include mq-lg {
+      max-width: $card-width;
+      height: $card-height;
+      margin: $outer-margin;
+      margin-top: $outer-margin/2;
+      margin-bottom: $outer-margin/2;
+      &:nth-child(odd) {
+        margin-right: $outer-margin/2;
+        .head::after {
+          @extend %arrow;
+          border-left-width: 15px;
+          border-left-style: solid;
+          left: 100%;
+        }
+        .head::before {
+          @extend %marker;
+          left: $marker-dist + 1;
+        }
+      }
+      &:nth-child(even) {
+        margin-left: $outer-margin/2;
+        .head::after {
+          @extend %arrow;
+          border-right-width: 15px;
+          border-right-style: solid;
+          right: 100%;
+        }
+        .head::before {
+          @extend %marker;
+          right: $marker-dist - 1;
+        }
+      }
+      &:nth-child(2) {
+        margin-top: $stagger;
+      }
+    }
+    .head {
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      font-weight: 400;
+      .number-box {
+        //display: inline;
+        // float: left;
+        margin: $inner-margin;
+        // padding: 10px;
+        // font-size: $number-size;
+        // line-height: $number-size;
+        // font-weight: 600;
+        background:rgba(255, 255, 255, 0);//rgba(0, 0, 0, 0.17);
+      }
+      h2 {
+        color: $primary-color-text;
+        // text-transform: uppercase;
+        // font-size: 1.3rem;
+        // font-weight: inherit;
+        // letter-spacing: 2px;
+        // margin: 0;
+        // padding-bottom: 6px;
+        // line-height: 1rem;
+        // @include mq-sm {
+        //   font-size: 165%;
+        //   line-height: 1.2rem;
+        }
+        span {
+          display: block;
+          font-size: 0.6rem;
+          margin: 0;
+          @include mq-sm {
+            font-size: 0.8rem;
+          }
+        }
+      // }
+    }
+    .body {
+      background: #fff;
+      // border: $border;
+      // border-top: 0;
+      padding: $inner-margin;
+      @include mq-lg {
+        height: $body-height;
+      }
+      // p {
+      //   font-size: 14px;
+      //   line-height: 18px;
+      //   margin-bottom: $inner-margin;
+      // }
+      img {
+        display: block;
+        width: 100%;
+      }
+    }
+    @for $i from 1 through $items {
+      &--step#{$i} {
+        // $color: nth($colors, ((($i - 1) % 4) + 1));
+        background-color: $primary-color;
+        .head::after {
+          border-color: $primary-color;
+        }
+      }
+    }
+  }
+}
+
+/* ----------------------------------- END TIMELINE STYLES -------------------------------- */
