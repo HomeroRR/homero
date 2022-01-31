@@ -13,8 +13,8 @@
     {% endif %}
     <meta charset="UTF-8">
     <title>Homero Roman</title>
-    <meta name="description" content="Homero Roman. Personal website and blog. Software Engineer at Microsoft Research AI. Open for positions.">
-    <meta name="keywords" content="homero, roman, rmm, software, engineer, engineering, development, dev, Microsoft, msft, msr, research, ai, AI">
+    <meta name="description" content="Homero Roman. Personal website and blog. Software Engineer at Qualcomm. Open for positions.">
+    <meta name="keywords" content="homero, roman, rmm, software, engineer, engineering, development, dev, Microsoft, msft, msr, research, ai, AI, Qualcomm">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 {% seo %}    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -38,11 +38,14 @@
 
     <!-- Banner header  -->
     <header class="page-header"  role="banner">
-        <img src="{{ '/assets/images/homero.jpg' }}" class="round" alt="Homero's Profile Picture"/>  
+        <img src="{{ '/assets/images/homero.jpg' }}" class="round" alt="Homero's Profile Picture"/>
             <h1 class="project-name">{{ site.title | default:page.title  }}</h1>
-            <img src="{{ '/assets/images/microsoft_logo.png' }}" alt="Microsoft logo"/>  
             <div class="inline-block">
               <img src="{{ '/assets/images/stanford_logo_part2.png' }}" alt="Stanford logo"/>
+            </div>
+            <img src="{{ '/assets/images/microsoft_logo.png' }}" alt="Microsoft logo"/>
+            <div class="inline-block">
+              <img style="filter: brightness(0) invert(1);" src="{{ '/assets/images/qualcomm_logo.png' }}" alt="Qualcomm logo"/>
             </div>
     </header>
 
@@ -53,7 +56,8 @@
         <section id=timeline>
           <h1>Experience</h1>
           <div class="demo-card-wrapper">
-            {% for publication in site["experience"] %}
+            {% assign ordered_pages = site["experience"] | sort:"order_number" %}
+            {% for publication in ordered_pages %}
             <div class="demo-card demo-card--step1">
               <div class="head">
                 {% if publication.year %}
@@ -78,7 +82,7 @@
         | append: ":cpp,tf,js,angular,azure"
         | append: ":r,keras,sass,django,aws"
         | append: ":java,scikit,css,flask,mongodb"
-        | append: ":swift,spark,html,bootstrap,mysql"| split: ":" %}
+        | append: ":cuda,spark,html,bootstrap,mysql"| split: ":" %}
         <h1 class="centered tab_section">Skills</h1>
         {% for skills_set in skills_sets %}
           {% assign skills = skills_set | split: "," %}
@@ -95,7 +99,7 @@
         <h1 class="tab_section">Education</h1>
         <img src={{ '/assets/images/stanford_logo_part1.png' }} />
         <h2>Stanford University</h2>
-        <h1> <b>MS</b> and <b>BS</b> in Computer Science (AI, Systems)</h1>        
+        <h1> <b>MS</b> and <b>BS</b> in Computer Science (AI, Systems)</h1>
       </div>
 
       <!-- Projects and publications sections -->
@@ -122,7 +126,7 @@
       <!-- Contact section -->
       <div class="section border-top" id="contact">
         <h1 class="centered tab_section">Contact</h1>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScjC-sfHIadgQQkv3JSbL9_VE5MRRK_Toxs_mN7LJnOTrneoQ/viewform?embedded=true" 
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScjC-sfHIadgQQkv3JSbL9_VE5MRRK_Toxs_mN7LJnOTrneoQ/viewform?embedded=true"
         width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Loading…
         </iframe>
       </div>

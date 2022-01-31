@@ -644,7 +644,7 @@ a {
 $background: #f7f7f7;
 $box-shadow: 0px 1px 22px 4px rgba(0, 0, 0, 0.07);
 $border: 1px solid rgba(191, 191, 191, 0.4);
-$items: 5;
+$items: 7;
 $rows: ceil($items/2);
 
 /* Card sizing */
@@ -668,7 +668,7 @@ $timeline: #bdbdbd;
 
 /* Calculations */
 
-$container-height: $rows * ($card-height + $outer-margin) + $stagger - 100px;
+$container-height: $rows * ($card-height + $outer-margin) + $stagger - 100px - 200px;
 $container-width: $card-width*2 + $outer-margin*3;
 $head-height: $number-size + 50;
 $body-height: $card-height - $head-height;
