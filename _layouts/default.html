@@ -40,6 +40,7 @@
     <header class="page-header"  role="banner">
         <img src="{{ '/assets/images/homero.jpg' }}" class="round" alt="Homero's Profile Picture"/>
             <h1 class="project-name">{{ site.title | default:page.title  }}</h1>
+            <div class="project-tagline">{{ site.description_a  }}</div>
             <div class="inline-block">
               <img src="{{ '/assets/images/stanford_logo_part2.png' }}" alt="Stanford logo"/>
             </div>
@@ -62,7 +63,7 @@
               <div class="head">
                 {% if publication.year %}
                 <div class="number-box">
-                  <img class="tiny-square" src={{ publication.picture }} alt="Graphic"/>
+                  <img class="small-square" src={{ publication.picture }} alt="Graphic"/>
                 </div>
                 {% endif %}
                 <h2>{% if publication.subtitle %}<span>{{ publication.subtitle }}</span>{% endif%} {{ publication.title }}</h2>
@@ -77,12 +78,12 @@
       </div>
 
       <!-- Skills Section -->
-      <div class="section simple-border padding-bottom" id="skills"> 
-        {% assign skills_sets = "python,pytorch,ts,react,docker"
-        | append: ":cpp,tf,js,angular,azure"
-        | append: ":r,keras,sass,django,aws"
-        | append: ":java,scikit,css,flask,mongodb"
-        | append: ":cuda,spark,html,bootstrap,mysql"| split: ":" %}
+      <div class="section simple-border padding-bottom border-top" id="skills"> 
+        {% assign skills_sets = "python,pytorch,ts,react,unity"
+        | append: ":cpp,tf,js,angular,unreal-engine"
+        | append: ":c-sharp,keras,sass,django,blender"
+        | append: ":java,scikit,css,flask,aws"
+        | append: ":mysql,cuda,html,bootstrap,docker"| split: ":" %}
         <h1 class="centered tab_section">Skills</h1>
         {% for skills_set in skills_sets %}
           {% assign skills = skills_set | split: "," %}
@@ -95,12 +96,46 @@
       </div>
 
       <!-- Education Section -->
-      <div class="centered section border-top" id="education">
+      <div class="centered section simple-border border-top" id="education">
         <h1 class="tab_section">Education</h1>
         <img src={{ '/assets/images/stanford_logo_part1.png' }} />
         <h2>Stanford University</h2>
         <h1> <b>MS</b> and <b>BS</b> in Computer Science (AI, Systems)</h1>
       </div>
+
+      <!-- Startups section -->
+      <div class="section simple-border border-top" id="startups">
+        <h1 class="centered tab_section">Startups</h1>
+        {% for startup in site["startups"] %}
+        <div class="centered">
+          <img src={{ startup.picture }} />
+          <h2>{{ startup.title }}</h2>
+        </div>
+        <div class="card"> 
+          <div class="desc">  
+            <p>
+              {{ startup.content }}
+            </p> 
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <!-- <div class="section border-top" id="startups">
+        <div class="simple-border">  
+            <h1 class="centered tab_section">Startups </h1>
+            {% for startup in site["startups"] %}
+            <img class="centered" src={{ startup.logo }} /><h2 class="centered">{{ startup.title }}</h2>
+            <div class="card"> 
+              <div class="centered-flex square"><img src={{ startup.picture }} /></div>
+              <div class="desc">  
+                <p>
+                  {{ startup.content }}
+                </p> 
+              </div>
+            </div>
+            {% endfor %}
+        </div>
+      </div>  -->
 
       <!-- Projects and publications sections -->
       {% assign content_types = "projects, publications" | split: ", " %}
@@ -108,9 +143,10 @@
       <div class="section border-top" id={{ content_type }}>
         <div class="simple-border">  
             <h1 class="centered tab_section"> {{content_type | capitalize }} </h1>
-            {% for publication in site[content_type] %}
+            {% assign ordered_projects = site[content_type] | sort:"order_number" %}
+            {% for publication in ordered_projects %}
             <div class="card"> 
-              <img src={{ publication.picture }} class="square"/>
+              <div class="centered-flex square"><img src={{ publication.picture }} /></div>
               <div class="desc">
                 <h2>{{ publication.title }}</h2>  
                 <p>

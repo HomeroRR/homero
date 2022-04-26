@@ -176,29 +176,29 @@ a {
 }
 
 .project-tagline {
-  margin-bottom: 2rem;
+  // margin-bottom: 2rem;
   font-weight: normal;
   opacity: 0.9;
 
   @include large {
-    font-size: 1.25rem;
+    font-size: 1.75rem;
   }
 
   @include medium {
-    font-size: 1.15rem;
+    font-size: 1.65rem;
   }
 
   @include small {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }
 
 .main-content {
   word-wrap: break-word;
 
-  :first-child {
-    margin-top: 0;
-  }
+  // :first-child {
+  //   margin-top: 0;
+  // }
 
   @include large {
     max-width: 100rem; //64
@@ -420,7 +420,7 @@ a {
   background-color: $header-bg-color;
 }
 .border { box-shadow: 2px 2px 4px $primary-color-dark; border-width: 2px; border-color: $divider-color; border-style: solid; margin-bottom: 5px;}
-.simple-border{ margin-bottom: 5px;}
+.simple-border{ padding-top: 10vh; padding-bottom: 10vh;}
 .round { border-radius: 25px; }
 
 .card {
@@ -469,6 +469,11 @@ a {
 }
 .centered{
   text-align: center;
+}
+.centered-flex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .bar{
   display:inline-block;
@@ -571,15 +576,19 @@ a {
   height: 280px;
 
 }
+.small-square{
+  width: 80px;
+  height: 80px;
+}
 .tiny-square{
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
 
 }
 
 .inline-block{
   display: inline-block;
-  justify-items: center;
+  justify-content: center;
   align-items: center;
 }
 
@@ -603,7 +612,7 @@ a {
 }
 
 .border-top{
-  border-top: solid 1px $hr-border-color;
+  border-top: solid 5px $hr-border-color;
 }
 
 .padding-bottom{
@@ -649,7 +658,7 @@ $rows: ceil($items/2);
 
 /* Card sizing */
 
-$card-height: 300px; //400
+$card-height: 400px; //400
 $card-width: 500px; //450
 $inner-margin: 15px;
 $number-size: 35px;
@@ -719,7 +728,7 @@ $counter: $items - $rows + 2;
 // }
 
 #timeline {
-  padding: 25px 0;
+  // padding: 25px 0;
   background: $background;
   border-top: $border;
   border-bottom: $border;

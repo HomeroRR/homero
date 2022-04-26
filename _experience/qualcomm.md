@@ -6,8 +6,8 @@ picture: "/assets/images/qualcomm_logo_tiny.png"
 order_number: 10
 ---
 <html>
-    Working on reducing the latency of Machine Learning models like BERT Large by optimizing the execution 
-                  of ML graphs across Qualcomm Neural Processing Units. Currently, leading the project 
+    Currently working on optimizing the execution 
+                  of ML graphs like BERT across Qualcomm Neural Processing Units. Leading my group 
                   as one of the main points of contact.
     <p class="centered">Dec. 2020 - present</p>
 </html>

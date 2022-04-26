@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+
+    {% if site.google_analytics %}
+      <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ site.google_analytics }}');
+      </script>
+    {% endif %}
+    <meta charset="UTF-8">
+    <title>{{ page.title  }}</title>
+
+{% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+  </head>
+  <body>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">{{ page.title  }}</h1>
+      <h2 class="project-tagline">{{ page.description  }}</h2>
+    </header>
+
+    <canvas id="c" ></canvas>
+    <h1 class="centered">Generated 3D Model of a cat</h1>
+    <main id="content" class="main-content" role="main">
+      {{ content }}
+      <footer class="site-footer">
+        {% if site.github.is_project_page %}
+          <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">This website</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
+        {% endif %}
+      </footer>
+    </main>
+
+    <script type="module">
+
+			import * as THREE from "{{ '/assets/js/three.module.js' }}";
+			import {OrbitControls} from "{{ '/assets/js/controls/OrbitControls.js' }}";
+			import { GLTFLoader } from "{{ '/assets/js/loaders/GLTFLoader.js' }}";
+
+			function main() {
+				const canvas = document.querySelector('#c');
+				const renderer = new THREE.WebGLRenderer({canvas});
+
+				const fov = 45;
+				const aspect = 16/9;  // the canvas default
+				const near = 0.1;
+				const far = 100;
+				const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+				camera.position.set(0.3, 0.8, 1.3);
+
+				const controls = new OrbitControls(camera, canvas);
+				controls.target.set(0, 0.5, 0);
+				controls.update();
+
+				const scene = new THREE.Scene();
+				scene.background = new THREE.Color('#3f51b5');
+
+				{
+					const planeSize = 40;
+
+					const loader = new THREE.TextureLoader();
+					const planeMat = new THREE.MeshPhongMaterial({color: '#1e3016'});
+					const planeGeo = new THREE.PlaneGeometry(planeSize, planeSize);
+					const mesh = new THREE.Mesh(planeGeo, planeMat);
+					mesh.rotation.x = Math.PI * -.5;
+					scene.add(mesh);
+				}
+
+				// {
+				// 	const skyColor = 0x464646; //0xB1E1FF;  // light blue
+				// 	const groundColor = 0x464646; //0xB97A20;  // brownish orange
+				// 	const intensity = 0.5;
+				// 	const light = new THREE.HemisphereLight(skyColor, groundColor, intensity);
+				// 	scene.add(light);
+				// }
+
+				{
+					const color = 0xFFFFFF;
+					const intensity = 1;
+					const light = new THREE.DirectionalLight(color, intensity);
+					light.position.set(1, 0.8, 1);
+					light.target.position.set(0, 0.5, 0);
+					scene.add(light);
+					scene.add(light.target);
+
+          const light2 = new THREE.DirectionalLight(color, 0.5);
+          light2.position.set(-0.3, 0.8, -1.3);
+          light2.target.position.set(0, 0.5, 0);
+          scene.add(light2);
+
+          const light3 = new THREE.DirectionalLight(color, intensity);
+          light3.position.set(-1, 0.8, 1);
+          light3.target.position.set(0, 0.5, 0);   
+          scene.add(light3);
+
+          const ambientLight = new THREE.AmbientLight( 0x404040,3 ); // soft white light
+          scene.add( ambientLight );
+				}
+
+				{	
+					const onProgress = function ( xhr ) {
+
+					if ( xhr.lengthComputable ) {
+
+						const percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+
+					}
+
+					};
+
+					const onError = function () { };
+					const loader = new GLTFLoader().setPath( "{{ '/assets/models/' }}" );
+					loader.load( 'cleaned_cat.glb', function ( gltf ) {
+
+						scene.add( gltf.scene );
+
+						gltf.animations; // Array<THREE.AnimationClip>
+						gltf.scene; // THREE.Group
+						gltf.scenes; // Array<THREE.Group>
+						gltf.cameras; // Array<THREE.Camera>
+						gltf.asset; // Object
+
+					}, onProgress, onError );
+				}
+
+			//	window.addEventListener( 'resize', onWindowResize );
+
+				// function onWindowResize() {
+
+				// 	camera.aspect = window.innerWidth / window.innerHeight;
+				// 	camera.updateProjectionMatrix();
+
+				// 	renderer.setSize( window.innerWidth, window.innerHeight );
+
+				// }
+
+				function resizeRendererToDisplaySize(renderer) {
+          console.log("Called resize check");
+					const canvas = renderer.domElement;
+					const width = canvas.clientWidth;
+					const height = canvas.clientHeight;
+					const needResize = canvas.width !== width || canvas.height !== height;
+					if (needResize) {
+					renderer.setSize(width, height, false);
+					}
+					return needResize;
+				}
+
+				function render() {
+          
+
+					if (resizeRendererToDisplaySize(renderer)) {
+					const canvas = renderer.domElement;
+					camera.aspect = canvas.clientWidth / canvas.clientHeight;
+					camera.updateProjectionMatrix();
+					}
+
+					renderer.render(scene, camera);
+
+					requestAnimationFrame(render);
+				}
+
+				requestAnimationFrame(render);
+				}
+
+				main();
+		</script>
+
+  </body>
+</html>
+
+<style>
+  #c{
+width: 100vw !important;
+  }
+</style>

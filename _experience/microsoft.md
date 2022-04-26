@@ -2,7 +2,7 @@
 title: Software Engineer 
 subtitle: Microsoft Research AI
 year: 2019
-picture: "/assets/images/microsoft_research.jpg"
+picture: "/assets/images/microsoft-hololens.jpg"
 order_number: 20
 ---
 <html>

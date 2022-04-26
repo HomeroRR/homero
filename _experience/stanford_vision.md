@@ -2,7 +2,7 @@
 title: Research Assistant 
 subtitle: Stanford Computer Science
 year: 2016
-picture: "/assets/images/stanford_cs.jpg"
+picture: "/assets/images/stanford_logo_tiny.png"
 order_number: 60
 ---
 <html>

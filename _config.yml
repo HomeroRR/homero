@@ -1,10 +1,11 @@
 theme: jekyll-theme-cayman
 
 title: Homero Roman
-description_a: Qualcomm Software Engineer
+description_a: Professional Software Engineer
 description_b: Masters in Computer Science
 
 collections:
     experience:
+    startups:
     projects:
     publications:
