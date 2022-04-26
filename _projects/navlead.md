@@ -1,6 +1,6 @@
 ---
 title: "Navlead: Virtual Navigation Assistant"
-picture: "/assets/images/navlead.png"
+picture: "/assets/images/navlead.PNG"
 order_number: 10
 ---
 <html>

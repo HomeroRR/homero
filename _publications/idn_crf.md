@@ -12,7 +12,7 @@ order_number: 50
         <a href="https://www.linkedin.com/in/amanda-lim">Amanda Lim</a>
     </p>
     <div class="card">
-        <img src='/assets/images/nlp.png' class="centered tiny-square"/>
+        <img src='/assets/images/nlp.PNG' class="centered tiny-square"/>
         <div class="desc">
            <a href='/assets/pdfs/idn-dialogue-act-classification-with-crfs.pdf'>PDF</a>
         </div>

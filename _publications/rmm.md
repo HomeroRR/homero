@@ -15,7 +15,7 @@ order_number: 10
     <div class="card">
         <img src='/assets/images/computer_vision.png' class="centered tiny-square"/>
         <div style="padding-left: 30px"></div>
-        <img src='/assets/images/nlp.png' class="centered tiny-square"/>
+        <img src='/assets/images/nlp.PNG' class="centered tiny-square"/>
         <div class="desc">
         <a href="https://arxiv.org/abs/2005.00728"> Abstract</a> | <a href="https://arxiv.org/pdf/2005.00728.pdf"> PDF</a>
         </div>

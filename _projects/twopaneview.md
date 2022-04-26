@@ -1,6 +1,6 @@
 ---
 title: React Native Two Pane View for the Microsoft Surface Duo
-picture: "/assets/images/duo.png"
+picture: "/assets/images/duo.PNG"
 order_number: 30
 ---
 <html>

@@ -1,6 +1,6 @@
 ---
 title: 3D Reconstruction of Physical Objects
-picture: "/assets/images/3D_reconstruction.png"
+picture: "/assets/images/3D_reconstruction.PNG"
 order_number: 20
 ---
 <html>

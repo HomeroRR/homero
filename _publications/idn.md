@@ -9,7 +9,7 @@ order_number: 40
         <u>Homero Roman Roman</u>
     </p>
     <div class="card">
-        <img src='/assets/images/nlp.png' class="centered tiny-square"/>
+        <img src='/assets/images/nlp.PNG' class="centered tiny-square"/>
         <div class="desc">
            <a href='/assets/pdfs/automatic-idn-dialog-act-tagging.pdf'>PDF</a> 
         </div>

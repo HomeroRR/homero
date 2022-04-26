@@ -11,7 +11,7 @@ order_number: 60
         <a href="https://www.alextamkin.com/">Alex Tamkin</a>
     </p>
     <div class="card">
-        <img src='/assets/images/nlp.png' class="centered tiny-square"/>
+        <img src='/assets/images/nlp.PNG' class="centered tiny-square"/>
         <div class="desc">
            <a href="https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1174/reports/2760395.pdf"> PDF</a>
         </div>
